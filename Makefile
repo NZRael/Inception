@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Colors constants
 PURPLE			= \033[38;5;141m
 GREEN			= \033[38;5;46m
 RED				= \033[0;31m
@@ -9,12 +8,10 @@ RESET			= \033[0m
 BOLD			= \033[1m
 CLEAR			= \r\033[K
 
-# Variables
 NAME			= inception
 CONTAINERS		= $(shell docker ps -a -q)
 VOLUMES			= $(shell docker volume ls -q)
 
-# Rules
 all: start
 
 init:
@@ -34,14 +31,6 @@ else
 	@printf "${CLEAR}${RESET}${GREEN}»${RESET} [${PURPLE}${BOLD}${NAME}${RESET}]: There's ${RED}nothing ${RESET}to stop.\n${RESET}"
 endif
 
-status:
-ifneq ($(CONTAINERS),)
-	@printf "${CLEAR}${RESET}${GREEN}»${RESET} [${PURPLE}${BOLD}${NAME}${RESET}]: Displaying containers status...\n${RESET}"
-	@docker ps -a
-else
-	@printf "${CLEAR}${RESET}${GREEN}»${RESET} [${PURPLE}${BOLD}${NAME}${RESET}]: There's ${RED}nothing ${RESET}to display.\n${RESET}"
-endif
-
 clean: stop
 ifneq ($(VOLUMES),)
 	@docker volume rm $$(docker volume ls -q) > /dev/null
@@ -55,4 +44,4 @@ endif
 fclean: clean
 	@sudo rm -rf ~/data
 
-.PHONE: all start stop status clean
+.PHONE: all start stop clean
