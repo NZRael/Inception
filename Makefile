@@ -21,7 +21,6 @@ init:
 start: init
 	@docker-compose -f ./srcs/docker-compose.yml up -d --build
 	@printf "${CLEAR}${RESET}${GREY}────────────────────────────────────────────────────────────────────────────\n${RESET}${GREEN}»${RESET} [${PURPLE}${BOLD}${NAME}${RESET}]: ${RED}${BOLD}${NAME} ${RESET}has cooked with ${GREEN}success${RESET}.${GREY}\n${RESET}${GREY}────────────────────────────────────────────────────────────────────────────\n${RESET}"
-	@make status
 
 stop:
 ifneq ($(CONTAINERS),)
